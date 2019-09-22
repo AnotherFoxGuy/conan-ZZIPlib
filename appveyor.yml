@@ -3,7 +3,7 @@ build: false
 environment:
     PYTHON: "C:\\Python37"
 
-    CONAN_REFERENCE: "libZZIP/0.13.63"
+    CONAN_REFERENCE: "zziplib/0.13.69"
     CONAN_USERNAME: "AnotherFoxGuy"
     CONAN_LOGIN_USERNAME: "AnotherFoxGuy"
     CONAN_CHANNEL: "testing"

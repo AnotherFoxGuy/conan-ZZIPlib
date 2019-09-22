@@ -1,7 +1,7 @@
 
 env:
    global:
-     - CONAN_REFERENCE: "libZZIP/0.13.63"
+     - CONAN_REFERENCE: "zziplib/0.13.69"
      - CONAN_USERNAME: "AnotherFoxGuy"
      - CONAN_LOGIN_USERNAME: "AnotherFoxGuy"
      - CONAN_CHANNEL: "testing"
@@ -12,7 +12,7 @@ linux: &linux
    dist: xenial
    sudo: required
    language: python
-   python: "3.6"
+   python: "3.7"
    services:
      - docker
 osx: &osx
