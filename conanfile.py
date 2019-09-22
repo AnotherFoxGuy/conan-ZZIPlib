@@ -1,5 +1,5 @@
 from conans import ConanFile, CMake, tools
-
+from conans.tools import os_info
 
 class zziplibConan(ConanFile):
     name = "zziplib"
@@ -21,18 +21,19 @@ class zziplibConan(ConanFile):
                               conan_basic_setup(TARGETS)
                               ''')
         tools.replace_in_file("zzip/CMakeLists.txt", "ZLIB::ZLIB", "CONAN_PKG::zlib")
-        tools.replace_in_file("zzip/CMakeLists.txt", "find_package", "# find_package")
+        tools.replace_in_file("zzip/CMakeLists.txt", "find_package ( ZLIB REQUIRED )", "")
         tools.replace_in_file("zzip/CMakeLists.txt", "add_library(libzzip ${libzzip_SRCS} )",
                               "add_library(libzzip STATIC ${libzzip_SRCS} )")
         tools.replace_in_file("zzipwrap/CMakeLists.txt", "ZLIB::ZLIB", "CONAN_PKG::zlib")
         tools.replace_in_file("zzipwrap/CMakeLists.txt", "pkg_search_module", "# pkg_search_module")
-        tools.replace_in_file("zzipwrap/CMakeLists.txt", "find_package", "# find_package")
+        tools.replace_in_file("zzipwrap/CMakeLists.txt", "find_package ( ZLIB REQUIRED )", "")
         tools.replace_in_file("zzipwrap/CMakeLists.txt", "add_library(libzzipwrap ${libzzipwrap_SRCS} )",
                               "add_library(libzzipwrap STATIC ${libzzipwrap_SRCS} )")
 
     def build(self):
         cmake = CMake(self)
-        cmake.definitions['ZZIPCOMPAT'] = 'OFF'
+        if os_info.is_windows:
+            cmake.definitions['ZZIPCOMPAT'] = 'OFF'
         cmake.definitions['ZZIPTEST'] = 'OFF'
         cmake.definitions['ZZIPDOCS'] = 'OFF'
         cmake.definitions['ZZIPBINS'] = 'OFF'
